@@ -40,7 +40,7 @@ export class RobotInterface {
     console.log(chalk.red(message) + "\n");
   }
 
-  outputReportMessage(message: string) {
+  outputSuccessMessage(message: string) {
     console.log(chalk.green(message) + "\n");
   }
 
@@ -118,7 +118,7 @@ export class RobotInterface {
       }
     }
 
-    this.outputReportMessage(
+    this.outputSuccessMessage(
       `Report: ${this.robotPosition.xCoordinate} ${
         this.robotPosition.yCoordinate
       } ${Orientation[this.robotPosition.facingDirection]}`
