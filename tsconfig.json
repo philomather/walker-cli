@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "outDir": "./dist",
+      "sourceMap": true
+    },
+    "include": ["src/**/*"],
+  }
