@@ -6,6 +6,7 @@ const main = async () => {
   await walkerInterface.promptForRoomDimensions();
   await walkerInterface.promptForStartingPosition();
   await walkerInterface.promptForNavigationCommandSequence();
+  walkerInterface.executeNavigationCommandSequence()
 
   walkerInterface.shutDown();
 };

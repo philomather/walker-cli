@@ -26,20 +26,6 @@ export const parseRobotPosition = (
     throw new RobotPositionParsingError("y_coordinate must be a number");
   }
 
-  const maxXvalue = roomConstraints.width - 1;
-  const maxYValue = roomConstraints.depth - 1;
-
-  if (
-    xCoordinate < 0 ||
-    xCoordinate > maxXvalue ||
-    yCoordinate < 0 ||
-    yCoordinate > maxYValue
-  ) {
-    throw new RobotPositionParsingError(
-      `Starting position must be within the bounds of the room i.e. on a grid between 0 0 and ${maxXvalue} ${maxYValue}`
-    );
-  }
-
   const orientation = Orientation[facingDirection];
   if (!orientation) {
     throw new RobotPositionParsingError(
@@ -47,5 +33,19 @@ export const parseRobotPosition = (
     );
   }
 
-  return new RobotPosition(xCoordinate, yCoordinate, orientation);
+  const robotPosition = new RobotPosition(
+    xCoordinate,
+    yCoordinate,
+    orientation
+  );
+
+  if (robotPosition.isOutOfBounds(roomConstraints)) {
+    throw new RobotPositionParsingError(
+      `Starting position must be within the bounds of the room i.e. on a grid between 0 0 and ${
+        roomConstraints.width - 1
+      } ${roomConstraints.depth - 1}`
+    );
+  }
+
+  return robotPosition;
 };

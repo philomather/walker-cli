@@ -1,11 +1,17 @@
 import { createInterface, Interface } from "readline";
 import { parseRoomDimensions, RoomDimensions } from "../room-dimensions";
-import { parseRobotPosition, RobotPosition } from "../robot-position";
+import {
+  Orientation,
+  parseRobotPosition,
+  RobotPosition,
+} from "../robot-position";
 import {
   NavigationCommandSequence,
   parseNavigationCommandSequence,
 } from "../navigation-commands";
 import chalk from "chalk";
+
+class OutOfBoundsError extends Error {}
 
 export class RobotInterface {
   readlineInterface: Interface;
@@ -32,6 +38,10 @@ export class RobotInterface {
 
   outputErrorMessage(message: string) {
     console.log(chalk.red(message) + "\n");
+  }
+
+  outputReportMessage(message: string) {
+    console.log(chalk.green(message) + "\n");
   }
 
   async promptForRoomDimensions(): Promise<void> {
@@ -95,5 +105,23 @@ export class RobotInterface {
     }
 
     this.navigationCommandSequence = navigationCommandSequence;
+  }
+
+  executeNavigationCommandSequence() {
+    const positionUpdateGenerator =
+      this.navigationCommandSequence.updatePosition(this.robotPosition);
+    for (let updatedPosition of positionUpdateGenerator) {
+      if (updatedPosition.isOutOfBounds(this.roomDimensions)) {
+        throw new OutOfBoundsError(
+          `Out of bounds at ${updatedPosition.xCoordinate} ${updatedPosition.yCoordinate}`
+        );
+      }
+    }
+
+    this.outputReportMessage(
+      `Report: ${this.robotPosition.xCoordinate} ${
+        this.robotPosition.yCoordinate
+      } ${Orientation[this.robotPosition.facingDirection]}`
+    );
   }
 }
