@@ -1,9 +1,4 @@
-export class RoomDimensions {
-  constructor(public width: number, public depth: number) {
-    this.width = width;
-    this.depth = depth;
-  }
-}
+import { RoomDimensions } from "./definition";
 
 class RoomDimensionsParsingError extends Error {}
 
@@ -12,7 +7,9 @@ export const parseRoomDimensions = (
 ): RoomDimensions => {
   const [widthString, depthString] = roomDimensionsString.split(" ");
   if (!depthString) {
-    throw new RoomDimensionsParsingError("Width and depth must be separated by a space");
+    throw new RoomDimensionsParsingError(
+      "Width and depth must be separated by a space"
+    );
   }
 
   const width = parseInt(widthString);

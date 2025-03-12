@@ -1,23 +1,5 @@
-import { RoomDimensions } from "./room-dimensions";
-
-enum Orientation {
-  N = "N",
-  E = "E",
-  S = "S",
-  W = "W",
-}
-
-export class RobotPosition {
-  constructor(
-    public xCoordinate: number,
-    public yCoordinate: number,
-    public facingDirection: Orientation
-  ) {
-    this.xCoordinate = xCoordinate;
-    this.yCoordinate = yCoordinate;
-    this.facingDirection = facingDirection;
-  }
-}
+import { Orientation, RobotPosition } from "./definition";
+import { RoomDimensions } from "../room-dimensions/definition";
 
 class RobotPositionParsingError extends Error {}
 

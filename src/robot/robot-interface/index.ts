@@ -1,10 +1,10 @@
 import { createInterface, Interface } from "readline";
-import { parseRoomDimensions, RoomDimensions } from "./room-dimensions";
-import { parseRobotPosition, RobotPosition } from "./robot-position";
+import { parseRoomDimensions, RoomDimensions } from "../room-dimensions";
+import { parseRobotPosition, RobotPosition } from "../robot-position";
 import {
   NavigationCommandSequence,
   parseNavigationCommandSequence,
-} from "./navigation-commands";
+} from "../navigation-commands";
 import chalk from "chalk";
 
 export class RobotInterface {
