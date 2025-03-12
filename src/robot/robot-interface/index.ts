@@ -31,9 +31,13 @@ export class RobotInterface {
   }
 
   async promptUser(prompt: string): Promise<string> {
-    return await new Promise((resolve) => {
+    const answeredPrompt = await new Promise<string>((resolve) => {
       this.readlineInterface.question(prompt, resolve);
     });
+
+    console.log()
+
+    return answeredPrompt;
   }
 
   outputErrorMessage(message: string) {
