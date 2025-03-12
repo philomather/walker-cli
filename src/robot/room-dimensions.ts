@@ -5,28 +5,24 @@ export class RoomDimensions {
   }
 }
 
+class RoomDimensionsParsingError extends Error {}
+
 export const parseRoomDimensions = (
   roomDimensionsString: string
 ): RoomDimensions => {
   const [widthString, depthString] = roomDimensionsString.split(" ");
   if (!depthString) {
-    console.error("Width and depth must be separated by a space");
-
-    throw Error;
+    throw new RoomDimensionsParsingError("Width and depth must be separated by a space");
   }
 
   const width = parseInt(widthString);
   if (isNaN(width)) {
-    console.error("Width must be a number");
-
-    throw Error;
+    throw new RoomDimensionsParsingError("Width must be a number");
   }
 
   const depth = parseInt(depthString);
   if (isNaN(depth)) {
-    console.error("Depth must be a number");
-
-    throw Error;
+    throw new RoomDimensionsParsingError("Depth must be a number");
   }
 
   return new RoomDimensions(width, depth);

@@ -5,6 +5,7 @@ import {
   NavigationCommandSequence,
   parseNavigationCommandSequence,
 } from "./navigation-commands";
+import chalk from "chalk";
 
 export class RobotInterface {
   readlineInterface: Interface;
@@ -29,6 +30,10 @@ export class RobotInterface {
     });
   }
 
+  outputErrorMessage(message: string) {
+    console.log(chalk.red(message) + "\n");
+  }
+
   async promptForRoomDimensions(): Promise<void> {
     let roomDimensions: RoomDimensions | undefined;
     while (!roomDimensions) {
@@ -38,7 +43,9 @@ export class RobotInterface {
 
       try {
         roomDimensions = parseRoomDimensions(dimensionsString);
-      } catch {
+      } catch (error) {
+        this.outputErrorMessage(error.message);
+
         continue;
       }
     }
@@ -55,8 +62,13 @@ export class RobotInterface {
       );
 
       try {
-        startingPosition = parseRobotPosition(startingPositionString, this.roomDimensions);
-      } catch {
+        startingPosition = parseRobotPosition(
+          startingPositionString,
+          this.roomDimensions
+        );
+      } catch (error) {
+        this.outputErrorMessage(error.message);
+
         continue;
       }
     }
@@ -75,7 +87,9 @@ export class RobotInterface {
         navigationCommandSequence = parseNavigationCommandSequence(
           navigationCommandsString
         );
-      } catch {
+      } catch (error) {
+        this.outputErrorMessage(error.message);
+
         continue;
       }
     }

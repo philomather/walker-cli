@@ -10,6 +10,8 @@ export class NavigationCommandSequence {
   }
 }
 
+class NavigationCommandParsingError extends Error {}
+
 export const parseNavigationCommandSequence = (
   navigationCommandSequenceString: string
 ) => {
@@ -19,13 +21,11 @@ export const parseNavigationCommandSequence = (
     (navigationCommandChar: string, index: number) => {
       const navigationCommand = NavigationCommand[navigationCommandChar];
       if (!navigationCommand) {
-        console.error(
+        throw new NavigationCommandParsingError(
           `The command at position ${
             index + 1
           } is not one of the valid navigation options, please try again`
         );
-
-        throw Error;
       }
       return NavigationCommand[navigationCommandChar];
     }

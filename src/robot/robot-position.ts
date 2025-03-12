@@ -19,6 +19,8 @@ export class RobotPosition {
   }
 }
 
+class RobotPositionParsingError extends Error {}
+
 export const parseRobotPosition = (
   robotPositionString: string,
   roomConstraints: RoomDimensions
@@ -27,25 +29,19 @@ export const parseRobotPosition = (
     robotPositionString.split(" ");
 
   if (!yCoordinateString || !facingDirection) {
-    console.error(
+    throw new RobotPositionParsingError(
       "x_coordinate, y_coordinate and facing_direction must be separated by spaces"
     );
-
-    throw Error;
   }
 
   const xCoordinate = parseInt(xCoordinateString);
   if (isNaN(xCoordinate)) {
-    console.error("x_coordinate must be a number");
-
-    throw Error;
+    throw new RobotPositionParsingError("x_coordinate must be a number");
   }
 
   const yCoordinate = parseInt(yCoordinateString);
   if (isNaN(yCoordinate)) {
-    console.error("y_coordinate must be a number");
-
-    throw Error;
+    throw new RobotPositionParsingError("y_coordinate must be a number");
   }
 
   const maxXvalue = roomConstraints.width - 1;
@@ -57,19 +53,16 @@ export const parseRobotPosition = (
     yCoordinate < 0 ||
     yCoordinate > maxYValue
   ) {
-    console.error(
+    throw new RobotPositionParsingError(
       `Starting position must be within the bounds of the room i.e. on a grid between 0 0 and ${maxXvalue} ${maxYValue}`
     );
-    throw Error;
   }
 
   const orientation = Orientation[facingDirection];
   if (!orientation) {
-    console.error(
+    throw new RobotPositionParsingError(
       "facing_direction must be a single letter cardinal direction\ni.e. one of N E S W"
     );
-
-    throw Error;
   }
 
   return new RobotPosition(xCoordinate, yCoordinate, orientation);
