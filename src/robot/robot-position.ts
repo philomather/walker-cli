@@ -1,3 +1,5 @@
+import { RoomDimensions } from "./room-dimensions";
+
 enum Orientation {
   N = "N",
   E = "E",
@@ -18,7 +20,8 @@ export class RobotPosition {
 }
 
 export const parseRobotPosition = (
-  robotPositionString: string
+  robotPositionString: string,
+  roomConstraints: RoomDimensions
 ): RobotPosition => {
   const [xCoordinateString, yCoordinateString, facingDirection] =
     robotPositionString.split(" ");
@@ -42,6 +45,21 @@ export const parseRobotPosition = (
   if (isNaN(yCoordinate)) {
     console.error("y_coordinate must be a number");
 
+    throw Error;
+  }
+
+  const maxXvalue = roomConstraints.width - 1;
+  const maxYValue = roomConstraints.depth - 1;
+
+  if (
+    xCoordinate < 0 ||
+    xCoordinate > maxXvalue ||
+    yCoordinate < 0 ||
+    yCoordinate > maxYValue
+  ) {
+    console.error(
+      `Starting position must be within the bounds of the room i.e. on a grid between 0 0 and ${maxXvalue} ${maxYValue}`
+    );
     throw Error;
   }
 

@@ -55,7 +55,7 @@ export class RobotInterface {
       );
 
       try {
-        startingPosition = parseRobotPosition(startingPositionString);
+        startingPosition = parseRobotPosition(startingPositionString, this.roomDimensions);
       } catch {
         continue;
       }
