@@ -49,7 +49,8 @@ export class RobotInterface {
     let roomDimensions: RoomDimensions | undefined;
     while (!roomDimensions) {
       const dimensionsString = await this.promptUser(
-        "Please enter the dimensions of the room in the following format:\nwidth depth\n"
+        "Please enter the dimensions of the room in the following format:\n" +
+          "width depth\n"
       );
 
       try {
@@ -69,7 +70,9 @@ export class RobotInterface {
 
     while (!startingPosition) {
       const startingPositionString = await this.promptUser(
-        "Please enter the starting position of the robot in the following format:\nx_coordinate y_coordinate facing_direction\n"
+        "Please enter the starting position of the robot in the following format:\n" +
+          "x_coordinate y_coordinate facing_direction\n" +
+          "Note that facing_direction is a cardinal direction, where N is positive w.r.t. depth and E positive w.r.t. width\n"
       );
 
       try {
@@ -92,7 +95,10 @@ export class RobotInterface {
 
     while (!navigationCommandSequence) {
       const navigationCommandsString = await this.promptUser(
-        "Please enter your series of navigation commands with no spaces, using the following codes:\nL = Turn left\nR = Turn right\nF = Walk forward\n"
+        "Please enter your series of navigation commands with no spaces, using the following codes:\n" +
+          "L = Turn left\n" +
+          "R = Turn right\n" +
+          "F = Walk forward\n"
       );
       try {
         navigationCommandSequence = parseNavigationCommandSequence(
