@@ -1,15 +1,12 @@
-import { createInterface, Interface } from "readline";
-import { parseRoomDimensions, RoomDimensions } from "../room-dimensions";
-import {
-  Orientation,
-  parseRobotPosition,
-  RobotPosition,
-} from "../robot-position";
-import {
-  NavigationCommandSequence,
-  parseNavigationCommandSequence,
-} from "../navigation-commands";
 import chalk from "chalk";
+import { createInterface, Interface } from "readline";
+
+import { RoomDimensions } from "./room-dimensions/definition";
+import { parseRoomDimensions } from "./room-dimensions/parser";
+import { Orientation, RobotPosition } from "./robot-position/definition";
+import { parseRobotPosition } from "./robot-position/parser";
+import { NavigationCommandSequence } from "./navigation-commands/definition";
+import { parseNavigationCommandSequence } from "./navigation-commands/parser";
 
 class OutOfBoundsError extends Error {}
 
@@ -35,7 +32,7 @@ export class RobotInterface {
       this.readlineInterface.question(prompt, resolve);
     });
 
-    console.log()
+    console.log();
 
     return answeredPrompt;
   }

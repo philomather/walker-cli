@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2024",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "./dist",
     "sourceMap": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*test.ts"]
 }
