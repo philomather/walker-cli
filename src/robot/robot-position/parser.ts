@@ -41,7 +41,7 @@ export const parseRobotPosition = (
 
   if (robotPosition.isOutOfBounds(roomConstraints)) {
     throw new RobotPositionParsingError(
-      `Starting position must be within the bounds of the room i.e. on a grid between 0 0 and ${
+      `Starting position must be within the bounds of the room\ni.e. on a grid between 0 0 and ${
         roomConstraints.width - 1
       } ${roomConstraints.depth - 1}`
     );
