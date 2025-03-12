@@ -18,6 +18,14 @@ To run the robot in development, use the command
 pnpm dev
 ```
 
+## Testing
+
+To run the test suite, use the command
+
+```bash
+pnpm test
+```
+
 ## Building and running the robot
 
 To transpile the Typescript run
