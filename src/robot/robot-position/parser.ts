@@ -1,7 +1,7 @@
 import { Orientation, RobotPosition } from "./definition";
 import { RoomDimensions } from "../room-dimensions/definition";
 
-class RobotPositionParsingError extends Error {}
+export class RobotPositionParsingError extends Error {}
 
 export const parseRobotPosition = (
   robotPositionString: string,

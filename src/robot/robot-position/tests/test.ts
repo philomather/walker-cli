@@ -1,5 +1,5 @@
-import { RoomDimensions } from "../room-dimensions/definition";
-import { Orientation, RobotPosition } from "./definition";
+import { RoomDimensions } from "../../room-dimensions/definition";
+import { Orientation, RobotPosition } from "../definition";
 
 describe("Robot position", () => {
   test("rotateLeft alters orientation but not coordinates", () => {

@@ -1,6 +1,6 @@
 import { RoomDimensions } from "./definition";
 
-class RoomDimensionsParsingError extends Error {}
+export class RoomDimensionsParsingError extends Error {}
 
 export const parseRoomDimensions = (
   roomDimensionsString: string

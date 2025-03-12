@@ -1,5 +1,5 @@
-import { Orientation, RobotPosition } from "../robot-position/definition";
-import { NavigationCommand, NavigationCommandSequence } from "./definition";
+import { Orientation, RobotPosition } from "../../robot-position/definition";
+import { NavigationCommand, NavigationCommandSequence } from "../definition";
 
 describe("Navigation commands", () => {
   test("updatePosition updates the robotPosition instance correctly", () => {

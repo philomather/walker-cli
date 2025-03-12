@@ -1,6 +1,6 @@
 import { NavigationCommand, NavigationCommandSequence } from "./definition";
 
-class NavigationCommandParsingError extends Error {}
+export class NavigationCommandParsingError extends Error {}
 
 export const parseNavigationCommandSequence = (
   navigationCommandSequenceString: string
