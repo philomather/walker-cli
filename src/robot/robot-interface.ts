@@ -7,6 +7,11 @@ import { Orientation, RobotPosition } from "./robot-position/definition";
 import { parseRobotPosition } from "./robot-position/parser";
 import { NavigationCommandSequence } from "./navigation-commands/definition";
 import { parseNavigationCommandSequence } from "./navigation-commands/parser";
+import { renderRoomAndRobot } from "./renderer";
+
+export type RobotInterfaceConfig = {
+  withRendering?: boolean;
+};
 
 class OutOfBoundsError extends Error {}
 
@@ -15,12 +20,23 @@ export class RobotInterface {
   roomDimensions: RoomDimensions;
   robotPosition: RobotPosition;
   navigationCommandSequence: NavigationCommandSequence;
+  renderingActive: boolean;
 
-  constructor() {
+  constructor(config: RobotInterfaceConfig) {
     this.readlineInterface = createInterface({
       input: process.stdin,
       output: process.stdout,
     });
+
+    if (config.withRendering) {
+      this.renderingActive = true;
+    }
+  }
+
+  render() {
+    if (this.renderingActive) {
+      renderRoomAndRobot(this.roomDimensions, this.robotPosition);
+    }
   }
 
   shutDown() {
@@ -118,6 +134,8 @@ export class RobotInterface {
     const positionUpdateGenerator =
       this.navigationCommandSequence.updatePosition(this.robotPosition);
     for (let updatedPosition of positionUpdateGenerator) {
+      this.render();
+
       if (updatedPosition.isOutOfBounds(this.roomDimensions)) {
         throw new OutOfBoundsError(
           `Out of bounds at ${updatedPosition.xCoordinate} ${updatedPosition.yCoordinate}`

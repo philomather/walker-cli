@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx src/main.ts",
+    "gui": "tsx src/main.ts --experimental_renderer",
     "build": "tsc",
     "start": "node dist/main.js",
     "test": "jest"

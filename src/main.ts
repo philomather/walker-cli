@@ -1,12 +1,19 @@
 import { RobotInterface } from "./robot/robot-interface";
 
 const main = async () => {
-  const walkerInterface = new RobotInterface();
+  const startCommandArgs = process.argv;
+  const robotInterfaceConfig = startCommandArgs.includes(
+    "--experimental_renderer"
+  )
+    ? { withRendering: true }
+    : {};
+
+  const walkerInterface = new RobotInterface(robotInterfaceConfig);
 
   await walkerInterface.promptForRoomDimensions();
   await walkerInterface.promptForStartingPosition();
   await walkerInterface.promptForNavigationCommandSequence();
-  walkerInterface.executeNavigationCommandSequence()
+  walkerInterface.executeNavigationCommandSequence();
 
   walkerInterface.shutDown();
 };

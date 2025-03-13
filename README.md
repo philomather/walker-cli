@@ -41,3 +41,11 @@ pnpm start
 ```
 
 to start the robot and follow the prompt to input your instructions.
+
+## Experimental
+
+To run the robot with a GUI that shows its placement and orientation within the room after every step:
+
+```bash
+pnpm gui
+```
